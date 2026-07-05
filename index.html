@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>まずは朝のパンを変えるだけ｜BASE BREAD</title>
+<style>
+  :root{
+    --ink:#2b2b2b; --sub:#666;
+    --brand:#0b6e4f; --brand-light:#e8f4ef;
+    --accent:#e8541e; --accent-dark:#c8420f;
+    --warm:#fff8ef; --line:#e2ddd4; --yellow:#fff3c4;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+    color:var(--ink); background:var(--warm);
+    font-size:21px; line-height:1.7;
+  }
+  img,svg{max-width:100%;display:block;}
+  .wrap{max-width:640px;margin:0 auto;background:#fff;}
+  .pad{padding:34px 22px;}
+
+  .photo-slot{position:relative;border-radius:16px;overflow:hidden;background:var(--brand-light);}
+  .photo-slot .cap{position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,.5);color:#fff;font-size:12px;padding:3px 10px;border-radius:999px;font-weight:700;}
+  .photo-slot svg{width:100%;height:auto;}
+  /* 実写：読み込めた場合は前面に表示、失敗時は下のSVGが残る */
+  .photo-slot .real{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#fff;}
+
+  .topbar{background:var(--brand);color:#fff;text-align:center;font-size:15px;padding:7px;font-weight:700;}
+
+  /* ヒーロー */
+  .hero{background:linear-gradient(180deg,#0b6e4f,#0a5c42);color:#fff;text-align:center;padding:28px 20px 26px;}
+  .hero h1{font-size:32px;line-height:1.45;margin:0 0 18px;font-weight:900;}
+  .hero h1 .mark{background:linear-gradient(transparent 58%,#ffd54a 58%);padding:0 4px;}
+  .hero .photo-slot{box-shadow:0 8px 24px rgba(0,0,0,.25);}
+
+  /* ひとことセクション */
+  .line{text-align:center;font-size:24px;font-weight:900;line-height:1.5;}
+  .line .brand{color:var(--brand);}
+  .sub{text-align:center;color:var(--sub);font-size:18px;margin:6px 0 0;}
+
+  .label{display:inline-block;background:var(--accent);color:#fff;font-weight:900;font-size:16px;padding:5px 18px;border-radius:999px;}
+  .center{text-align:center;}
+
+  /* 数字カード */
+  .stats{display:flex;gap:12px;margin-top:20px;}
+  .stat{flex:1;background:var(--brand);color:#fff;border-radius:16px;padding:18px 8px;text-align:center;}
+  .stat .n{font-size:30px;font-weight:900;line-height:1.1;}
+  .stat small{font-size:13px;color:#d6f2e6;font-weight:700;display:block;margin-top:4px;}
+
+  .bones{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px;}
+  .bone{background:var(--brand-light);border:2px solid #cfe6db;border-radius:999px;padding:10px 20px;font-size:19px;font-weight:900;color:var(--brand);}
+
+  .cover{background:var(--yellow);color:#6b4e00;border-radius:14px;font-weight:800;font-size:20px;padding:18px;text-align:center;margin-top:20px;line-height:1.5;}
+  .cover b{color:var(--accent-dark);font-size:23px;}
+
+  /* 使用シーン（朝ごはん） */
+  .swap{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:20px;}
+  .swap .box{flex:1;max-width:190px;background:var(--warm);border:2px solid var(--line);border-radius:16px;padding:16px 8px;text-align:center;}
+  .swap .box.on{background:var(--brand-light);border-color:#bfe0d1;}
+  .swap .ic{font-size:44px;}
+  .swap .t{font-weight:900;font-size:16px;margin-top:4px;}
+  .swap .arrow{font-size:34px;color:var(--accent);font-weight:900;}
+  .arrowline{text-align:center;font-size:20px;font-weight:900;margin-top:22px;color:var(--brand);}
+
+  /* サポート */
+  .support{background:var(--brand-light);}
+  .sup{display:flex;gap:14px;align-items:center;background:#fff;border-radius:14px;padding:16px 18px;margin-top:12px;border:2px solid #d3e9df;}
+  .sup .ic{font-size:26px;background:var(--brand);color:#fff;width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .sup .t{font-size:19px;font-weight:900;color:var(--brand);}
+
+  /* 声 */
+  .v{display:flex;gap:12px;align-items:center;background:var(--warm);border:2px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:12px;}
+  .v .ava{width:48px;height:48px;border-radius:50%;overflow:hidden;flex:0 0 auto;}
+  .v .stars{color:#f5a623;font-size:16px;}
+  .v .who{font-size:14px;color:var(--sub);font-weight:700;}
+  .v p{margin:2px 0 0;font-size:17px;}
+
+  /* CTA */
+  .cta{background:linear-gradient(180deg,#fff8ef,#ffeede);text-align:center;}
+  .price{background:#fff;border:3px solid var(--accent);border-radius:16px;padding:18px;margin:18px 0;}
+  .price .off{display:inline-block;background:var(--accent);color:#fff;font-weight:900;font-size:17px;padding:4px 16px;border-radius:999px;}
+  .price .yen{font-size:40px;font-weight:900;color:var(--accent-dark);margin-top:6px;}
+  .price .yen small{font-size:17px;color:var(--sub);}
+  .price .note{font-size:15px;color:var(--sub);margin-top:4px;}
+  .btn{display:block;background:var(--accent);color:#fff;text-decoration:none;font-size:25px;font-weight:900;padding:22px;border-radius:16px;box-shadow:0 6px 0 var(--accent-dark);animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.96);border-top:2px solid var(--line);padding:10px 14px;max-width:640px;margin:0 auto;box-shadow:0 -4px 16px rgba(0,0,0,.08);}
+  .sticky a{display:block;background:var(--accent);color:#fff;text-decoration:none;font-size:20px;font-weight:900;text-align:center;padding:14px;border-radius:12px;box-shadow:0 4px 0 var(--accent-dark);}
+
+  .disclaimer{background:#f2efe9;color:#888;font-size:13px;line-height:1.7;padding:18px 22px 120px;}
+  hr.soft{border:none;border-top:2px dotted var(--line);margin:0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">SNSで話題の完全栄養の主食 BASE BREAD</div>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <h1>その<span class="mark">「まさかの骨折」</span>、<br>原因は栄養かも。</h1>
+    <div class="photo-slot">
+      <svg viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="朝食を楽しむシニア男性">
+        <rect width="640" height="340" fill="#f4ede0"/>
+        <rect width="640" height="140" fill="#eaf4ef"/>
+        <circle cx="540" cy="66" r="46" fill="#ffe6a8"/>
+        <rect x="40" y="28" width="150" height="104" rx="8" fill="#cfe6f5"/>
+        <line x1="115" y1="28" x2="115" y2="132" stroke="#fff" stroke-width="6"/><line x1="40" y1="80" x2="190" y2="80" stroke="#fff" stroke-width="6"/>
+        <rect y="278" width="640" height="62" fill="#d8b98f"/><rect y="270" width="640" height="12" fill="#c9a878"/>
+        <ellipse cx="320" cy="240" rx="92" ry="66" fill="#7aa8d8"/>
+        <circle cx="320" cy="146" r="54" fill="#f2c9a0"/>
+        <path d="M268 138 q52 -64 104 0 q-9 -42 -52 -42 q-43 0 -52 42z" fill="#e9e9e9"/>
+        <circle cx="302" cy="146" r="5" fill="#3a3a3a"/><circle cx="340" cy="146" r="5" fill="#3a3a3a"/>
+        <path d="M302 168 q18 14 38 0" stroke="#b3714a" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="450" cy="308" rx="52" ry="15" fill="#fff"/><path d="M412 300 q38 -30 76 0z" fill="#c98a4a"/><path d="M412 300 q38 -20 76 0z" fill="#e0a866"/>
+        <circle cx="205" cy="300" r="21" fill="#fff"/><rect x="195" y="286" width="20" height="26" rx="4" fill="#6b4a32"/>
+      </svg>
+      <img class="real" src="https://shop.basefood.co.jp/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fimg_lineup_bb.0o-votta-._x4.jpg&w=1200&q=75" alt="BASE BREAD ラインナップ" loading="eager" onerror="this.remove()">
+      <span class="cap">BASE BREAD 公式商品画像</span>
+    </div>
+  </section>
+
+  <!-- 共感 -->
+  <section class="pad">
+    <p class="line">医者に言われた。<br><span class="brand">「栄養が、偏っています」。</span></p>
+    <p class="sub">まずは朝のパン、ひとつ変えませんか。</p>
+  </section>
+
+  <hr class="soft">
+
+  <!-- ① 直接効果 -->
+  <section class="pad center">
+    <span class="label">① 骨に、効く栄養</span>
+    <p class="line" style="margin-top:16px;">骨づくりに欠かせない3つ。</p>
+    <div class="bones">
+      <span class="bone">カルシウム</span>
+      <span class="bone">ビタミンD</span>
+      <span class="bone">たんぱく質</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">33</div><small>種類の栄養素</small></div>
+      <div class="stat"><div class="n">13.5g</div><small>たんぱく質／袋</small></div>
+      <div class="stat"><div class="n">1/3</div><small>1日分の栄養／袋</small></div>
+    </div>
+    <div class="cover">🦴 たった2袋で、1食に必要な栄養素の<br><b>ほとんどを100%以上カバー</b></div>
+  </section>
+
+  <hr class="soft">
+
+  <!-- ② 使用シーン（朝ごはん） -->
+  <section class="pad center">
+    <span class="label">② 毎朝の、パンと交換</span>
+    <p class="line" style="margin-top:16px;">いつもの朝ごはんを、<br>置きかえるだけ。</p>
+    <div class="photo-slot" style="margin-top:18px;aspect-ratio:16/10;">
+      <svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="朝食を楽しむシニア男性">
+        <rect width="640" height="400" fill="#eef0e6"/>
+        <rect y="300" width="640" height="100" fill="#d8b98f"/>
+        <circle cx="320" cy="150" r="60" fill="#f2c9a0"/>
+        <ellipse cx="320" cy="300" rx="100" ry="70" fill="#b9b4a6"/>
+        <ellipse cx="230" cy="330" rx="46" ry="16" fill="#fff"/><ellipse cx="410" cy="330" rx="46" ry="16" fill="#fff"/>
+      </svg>
+      <img class="real" src="images/senior-breakfast.png" alt="朝ごはんを食べるシニア男性" loading="lazy" onerror="this.remove()">
+      <span class="cap">朝食シーン</span>
+    </div>
+    <p class="arrowline">火も包丁もいらない。準備ゼロ分。</p>
+  </section>
+
+  <hr class="soft">
+
+  <!-- ③ サポート -->
+  <section class="support pad">
+    <div class="center"><span class="label">③ 買ったあとも安心</span></div>
+    <div class="sup"><div class="ic">📦</div><div class="t">ご自宅まで定期おとどけ</div></div>
+    <div class="sup"><div class="ic">🔄</div><div class="t">いつでも解約・お休みOK</div></div>
+    <div class="sup"><div class="ic">☎️</div><div class="t">電話で相談できる窓口</div></div>
+    <div class="sup"><div class="ic">🛡️</div><div class="t">不良品はすぐ交換・返金</div></div>
+  </section>
+
+  <hr class="soft">
+
+  <!-- 声 -->
+  <section class="pad">
+    <div class="v">
+      <div class="ava"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" fill="#0b6e4f"/><circle cx="24" cy="18" r="11" fill="#f2c9a0"/><path d="M6 48 q18 -20 36 0z" fill="#7aa8d8"/></svg></div>
+      <div><div class="stars">★★★★★</div><p>朝のパンを替えるだけ。無理なく続いています。</p><div class="who">70歳・男性</div></div>
+    </div>
+    <div class="v">
+      <div class="ava"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" fill="#e8541e"/><circle cx="24" cy="18" r="11" fill="#f2c9a0"/><path d="M6 48 q18 -20 36 0z" fill="#fff"/></svg></div>
+      <div><div class="stars">★★★★★</div><p>これ1つで栄養がとれる安心感があります。</p><div class="who">68歳・女性</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta pad">
+    <p class="line">まずは、明日の朝から。</p>
+    <div class="price">
+      <span class="off">初回20%OFF</span>
+      <div class="yen"><small>1食あたり</small> 約156円〜</div>
+      <div class="note">送料・しばりなし／いつでも解約OK</div>
+    </div>
+    <a class="btn" href="https://shop.basefood.co.jp/" target="_blank" rel="noopener">公式サイトで試す ▶</a>
+  </section>
+
+  <!-- 注記 -->
+  <section class="disclaimer">
+    BASE BREADは食品であり、特定疾病（骨折・骨粗しょう症等）の予防・治療を目的としたものではありません。数値（33種類の栄養素／たんぱく質13.5g・1袋／1日の約1/3・2袋で100%以上カバー 等）は商品により異なります。最新の栄養成分・価格・原材料は公式サイト（shop.basefood.co.jp）でご確認ください。画像・お客様の声・価格・電話番号はイメージ／掲載例です。
+  </section>
+
+</div>
+
+<div class="sticky">
+  <a href="https://shop.basefood.co.jp/" target="_blank" rel="noopener">▶ 初回20%OFFで試す</a>
+</div>
+
+</body>
+</html>
