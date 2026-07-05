@@ -96,6 +96,49 @@
 
   .disclaimer{background:#f2efe9;color:#888;font-size:13px;line-height:1.7;padding:18px 22px 120px;}
   hr.soft{border:none;border-top:2px dotted var(--line);margin:0;}
+
+  /* ===== レスポンシブ（スマホ最適化） ===== */
+  body{-webkit-text-size-adjust:100%;}
+  .wrap{width:100%;overflow-x:clip;} /* 横はみ出し防止（縦の全体スクロールは阻害しない） */
+
+  /* 一般的なスマホ（〜480px） */
+  @media (max-width:480px){
+    body{font-size:19px;}
+    .pad{padding:28px 18px;}
+    .hero{padding:24px 16px 22px;}
+    .hero h1{font-size:27px;}
+    .line{font-size:22px;}
+    .sub{font-size:16px;}
+    .label{font-size:15px;padding:5px 15px;}
+    .stats{gap:8px;}
+    .stat{padding:16px 4px;border-radius:14px;}
+    .stat .n{font-size:24px;}
+    .stat small{font-size:11px;}
+    .bone{font-size:17px;padding:9px 16px;}
+    .cover{font-size:18px;padding:16px;}
+    .cover b{font-size:21px;}
+    .swap{gap:8px;}
+    .swap .box{padding:14px 6px;}
+    .swap .ic{font-size:38px;}
+    .swap .arrow{font-size:26px;}
+    .sup .t{font-size:17px;}
+    .btn{font-size:22px;padding:20px;}
+    .sticky a{font-size:18px;padding:13px;}
+  }
+
+  /* 小型スマホ（〜360px：iPhone SE 等） */
+  @media (max-width:360px){
+    body{font-size:18px;}
+    .pad{padding:24px 14px;}
+    .hero h1{font-size:24px;}
+    .line{font-size:20px;}
+    .stat .n{font-size:21px;}
+    .stat small{font-size:10px;}
+    .bone{font-size:16px;padding:8px 13px;}
+    .cover{font-size:17px;}
+    .cover b{font-size:19px;}
+    .btn{font-size:20px;}
+  }
 </style>
 </head>
 <body>
