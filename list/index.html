@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<title>BASE BREAD 記事LP 一覧</title>
+<style>
+  :root{
+    --ink:#2b2b2b; --sub:#666;
+    --brand:#0b6e4f; --brand-light:#e8f4ef;
+    --accent:#e8541e; --accent-dark:#c8420f;
+    --warm:#fff8ef; --line:#e2ddd4; --pink:#d98aa8; --pink-dark:#b5567e;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--warm); color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+    font-size:20px; line-height:1.7;
+  }
+  .wrap{max-width:640px;margin:0 auto;background:#fff;min-height:100vh;overflow-x:clip;}
+  .head{background:linear-gradient(180deg,#0b6e4f,#0a5c42);color:#fff;text-align:center;padding:30px 20px 26px;}
+  .head h1{font-size:26px;font-weight:900;margin:0 0 6px;}
+  .head p{margin:0;font-size:16px;color:#d6f2e6;}
+  .list{padding:26px 20px 40px;}
+
+  .card{
+    display:block;text-decoration:none;color:var(--ink);
+    border:3px solid var(--brand);border-radius:18px;overflow:hidden;
+    margin-bottom:22px;box-shadow:0 6px 0 rgba(11,110,79,.18);
+    transition:transform .1s;
+  }
+  .card:active{transform:translateY(2px);}
+  .card.pink{border-color:var(--pink);box-shadow:0 6px 0 rgba(181,86,126,.18);}
+
+  .card .banner{padding:10px 18px;color:#fff;font-weight:900;font-size:18px;display:flex;align-items:center;gap:10px;background:var(--brand);}
+  .card.pink .banner{background:var(--pink);}
+  .card .banner .em{font-size:24px;}
+
+  .card .body{padding:18px 20px 20px;}
+  .card .body h2{margin:0 0 4px;font-size:23px;font-weight:900;}
+  .card .body .who{font-size:16px;color:var(--sub);margin:0 0 14px;}
+  .card .body .go{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--accent);color:#fff;font-weight:900;font-size:20px;
+    padding:15px;border-radius:12px;box-shadow:0 4px 0 var(--accent-dark);
+  }
+  .card .url{font-size:13px;color:#999;margin:10px 0 0;word-break:break-all;text-align:center;}
+
+  .note{color:#999;font-size:13px;text-align:center;padding:0 20px 40px;line-height:1.7;}
+
+  @media (max-width:480px){
+    body{font-size:18px;}
+    .head h1{font-size:23px;}
+    .card .body h2{font-size:21px;}
+    .card .body .go{font-size:18px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <h1>BASE BREAD 記事LP 一覧</h1>
+    <p>ターゲット別ページ（社内確認用・検索非公開）</p>
+  </div>
+
+  <div class="list">
+
+    <!-- 足骨折むけ -->
+    <a class="card" href="../">
+      <div class="banner"><span class="em">🦴</span> 足骨折むけ</div>
+      <div class="body">
+        <h2>その「まさかの骨折」、原因は栄養かも。</h2>
+        <p class="who">65〜75歳・アクティブシニア（転倒／骨折をきっかけに食事を見直す層）</p>
+        <div class="go">ページを開く ▶</div>
+        <p class="url">https://kouta1110.github.io/basefood-senior-lp/</p>
+      </div>
+    </a>
+
+    <!-- 女性向け -->
+    <a class="card pink" href="../a/">
+      <div class="banner"><span class="em">🌸</span> 女性向け</div>
+      <div class="body">
+        <h2>気づけば、一日中お菓子。その毎日で大丈夫？</h2>
+        <p class="who">シニア女性（食生活の乱れ・栄養バランスが気になる層／朝ごはん置きかえ）</p>
+        <div class="go">ページを開く ▶</div>
+        <p class="url">https://kouta1110.github.io/basefood-senior-lp/a/</p>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="note">※ 各ページは検索非公開（noindex）です。関係者へのリンク共有のみでご利用ください。</p>
+
+</div>
+</body>
+</html>
